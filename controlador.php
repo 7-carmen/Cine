@@ -11,7 +11,7 @@ include("seguridad.php");
             $this->security = new Security();
         }
 
-        //Inicia la conexion, todas las peticiones pasan por aqui. 
+        //Inicia la conexion, todas las peticiones pasan por aquí. 
         public function iniciar_conexon(){
         if (isset($_REQUEST["do"])) {   // La variable "do" controla el estado de la aplicación
             $do = $_REQUEST["do"];
@@ -19,7 +19,7 @@ include("seguridad.php");
             $do = "mostrar_página";      // Estado por defecto
         }
         $this->$do();   // Ejecuta la función con el nombre $do. 
-                        // P. ej: si $do vale "showFormLogin", ejecuta $this->showFormLogin()
+                        // Ej: si $do vale "showFormLogin", ejecuta $this->showFormLogin()
         }
 
         public function mostrar_página(){
@@ -52,7 +52,7 @@ include("seguridad.php");
                 $data["datosUsuario"] = $this->user->getUsuarioAll($usurname);
                 View::show("vista_logUsu", $data);
             } else {
-                // Tipo de usuario desconocido O no se ha hecho login
+                // Tipo de usuario desconocido O, no se ha hecho login
                 $data["mensaje"] = "No tienes permiso para hacer esto";
                 View::redirect("vista_logearse", $data);
             }
