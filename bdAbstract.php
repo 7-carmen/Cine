@@ -13,6 +13,7 @@
          */
         public function sqlSelect($sql) {
             $result = $this->mysql->query($sql);
+            var_dump($result);
             $a = array();
             while ($row = $result->fetch_object()) {
                 $a[] = $row;

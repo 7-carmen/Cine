@@ -67,3 +67,5 @@ INSERT INTO actores VALUES(NULL, 'Hero', 'Fiennes-Tiffin', 'Britanico' );
 INSERT INTO actores VALUES(NULL, 'Angelina', 'Jolie', 'Estadounidense/Camboyana' );
 
 INSERT INTO usuarios VALUES(NULL, 'cka', 'Carmen', 'Soriano', 'cka@gmail.com', 'cka', TRUE);
+
+SELECT * FROM usuarios;
