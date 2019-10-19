@@ -57,4 +57,28 @@ include("seguridad.php");
                 View::redirect("vista_logearse", $data);
             }
         }
+
+        public function registrarse(){
+            $data['usuario'] = $_REQUEST['usuario'];
+            $data['pasword'] = $_REQUEST['contraseña'];
+            $data['nombre'] = $_REQUEST['nombre'];
+            $data['apellidos'] = $_REQUEST['apellidos'];
+            $data['correo'] = $_REQUEST['correo'];
+            $userOk = $this->user->getUsuarioAll( $data['usuario']);
+            if($userOk){
+                $data["mensaje"] = "Nombre de usuario ya creado, elija otro.";
+                View::show("vista_registrarse", $data);
+            }else {
+            $resultInsert = $this->user->insert($data);
+            if ($resultInsert == 1) {
+                $data["mensaje"] = "Usuario creado con éxito";
+                View::show("vista_registrarse", $data);
+            } else {
+    
+                $data["mensaje"] = "Error, no se puedo crear el usuario";
+                View::show("vista_registrarse", $data);
+            }
+        }
+        }
+
     }

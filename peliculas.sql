@@ -9,7 +9,7 @@ nombre VARCHAR(50) NOT NULL,
 apellidos VARCHAR(100) NOT NULL,
 correo VARCHAR(100) NOT NULL,
 contraseña VARCHAR(50) NOT NULL,
-tipo BOOLEAN NOT NULL
+tipo INT NOT NULL
 );
 
 CREATE TABLE peliculas (
@@ -67,7 +67,7 @@ INSERT INTO actores VALUES(NULL, 'Will', 'Smith', 'Estadounidense' );
 INSERT INTO actores VALUES(NULL, 'Hero', 'Fiennes-Tiffin', 'Britanico' );
 INSERT INTO actores VALUES(NULL, 'Angelina', 'Jolie', 'Estadounidense/Camboyana' );
 
-INSERT INTO usuarios VALUES(NULL, 'cka', 'Carmen', 'Soriano', 'cka@gmail.com', 'cka', FALSE);
+INSERT INTO usuarios VALUES(NULL, 'cka', 'Carmen', 'Soriano', 'cka@gmail.com', 'cka', 1);
 
 SELECT * FROM usuarios WHERE usuario = 'cka' AND contraseña = 'cka';
 
