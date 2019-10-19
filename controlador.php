@@ -24,7 +24,7 @@ include("seguridad.php");
 
         public function mostrar_página(){
             $data["mensaje"] = (isset($_REQUEST["mensaje"]) ? $_REQUEST["mensaje"] : null);
-             View::show("vista_principal", $data);
+            View::show("vista_principal", $data);
         }
 
         public function logearse(){

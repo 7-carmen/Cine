@@ -14,6 +14,7 @@ tipo BOOLEAN NOT NULL
 
 CREATE TABLE peliculas (
 id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+cartel VARCHAR(50) NOT NULL,
 nombre VARCHAR(50) NOT NULL,
 anyo_presentacion INT NOT NULL,
 duracion INT NOT NULL,
@@ -58,14 +59,16 @@ FOREIGN KEY (id_actor) REFERENCES actores(id),
 FOREIGN KEY (id_pelicula) REFERENCES peliculas(id)
 );
 
-INSERT INTO peliculas VALUES(NULL, 'After', 2019, 105, 'Romance' );
-INSERT INTO peliculas VALUES(NULL, 'El coleccionista de huesos', 2000, 118, 'Suspense' );
-INSERT INTO peliculas VALUES(NULL, '7 almas', 2009, 123, 'Dromatico' );
+INSERT INTO peliculas VALUES(NULL, 'after.jpg', 'After', 2019, 105, 'Romance' );
+INSERT INTO peliculas VALUES(NULL, 'c_huesos.jpg', 'El coleccionista de huesos', 2000, 118, 'Suspense' );
+INSERT INTO peliculas VALUES(NULL, '7almas.jpg', '7 almas', 2009, 123, 'Dromatico' );
 
 INSERT INTO actores VALUES(NULL, 'Will', 'Smith', 'Estadounidense' );
 INSERT INTO actores VALUES(NULL, 'Hero', 'Fiennes-Tiffin', 'Britanico' );
 INSERT INTO actores VALUES(NULL, 'Angelina', 'Jolie', 'Estadounidense/Camboyana' );
 
-INSERT INTO usuarios VALUES(NULL, 'cka', 'Carmen', 'Soriano', 'cka@gmail.com', 'cka', TRUE);
+INSERT INTO usuarios VALUES(NULL, 'cka', 'Carmen', 'Soriano', 'cka@gmail.com', 'cka', FALSE);
 
-SELECT * FROM usuarios;
+SELECT * FROM usuarios WHERE usuario = 'cka' AND contraseña = 'cka';
+
+SELECT * FROM usuarios WHERE usuario = 'cka' AND contraseña = 'cka';
