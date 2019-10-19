@@ -5,6 +5,10 @@
 
         public function __construct($dbHost, $dbUser, $dbPass, $dbName) {
             $this->mysql = new mysqli($dbHost, $dbUser, $dbPass, $dbName);
+            if (! $this->mysql->set_charset("utf8")) {
+                printf("Error cargando el conjunto de caracteres utf8: %s\n", $this->mysql->error);
+                exit();
+            }
         }
 
         /**
@@ -13,9 +17,14 @@
          */
         public function sqlSelect($sql) {
             $result = $this->mysql->query($sql);
+            //var_dump($result);
             $a = array();
-            while ($row = $result->fetch_object()) {
-                $a[] = $row;
+            if($result==false){
+                echo "ERROR: Could not execute $sql. " . print_r($this->mysql->error);
+            }else{
+                while ($row = $result->fetch_object()) {
+                    $a[] = $row;
+                }
             }
             return $a;
         }

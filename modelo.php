@@ -10,7 +10,7 @@ class Usuarios {
     }
 
     public function getForUsername($username, $pasword) {
-        $result = $this->conexdb->sqlSelect("SELECT * FROM usuarios WHERE nombre = '$username' AND pasword = '$pasword'");
+        $result = $this->conexdb->sqlSelect("SELECT * FROM usuarios WHERE usuario = '$username' AND contraseña = '$pasword'");
             if (count($result) > 0) {
                 return $result;
             } else {
