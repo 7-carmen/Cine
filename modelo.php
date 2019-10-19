@@ -38,8 +38,7 @@ class Usuarios {
         $nombre = $data["nombre"];
         $apellidos = $data["apellidos"];
         $correo = $data["correo"];
-        $sql = ("INSERT INTO usuarios VALUES ('$username', '$pasword', 1, '$nombre', '$apellidos', '$correo')");
-        echo $sql;
+        $sql = ("INSERT INTO usuarios VALUES (NULL,'$username', '$nombre', '$apellidos', '$correo', '$pasword', 1)");
         $result = $this->conexdb->sqlOther($sql);
         if ($result == 1) {
             return true;
