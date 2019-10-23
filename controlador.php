@@ -32,7 +32,7 @@ include("seguridad.php");
             $pasword = $_REQUEST["contraseña"];
             $userOk = $this->user->getForUsername($username, $pasword);
             if ($userOk!=null) {
-               $this->security->openSession(["id" => $userOk[0]->id, "tipo" => $userOk[0]->tipo]);
+               $this->security->openSession(["id" => $userOk[0]->id, "tipo" => $userOk[0]->tipo, "nombre" => $userOk[0]->usuario ]);
                View::redirect("mostrar_datos");
             } else {
                 $data["mensaje"] = "Nombre de usuario o contraseña incorrecto";
@@ -79,6 +79,86 @@ include("seguridad.php");
                 View::show("vista_registrarse", $data);
             }
         }
+        }
+
+        public function desconectar(){
+            session_destroy();
+            header("Location: index.php");
+        }
+
+        public function mostrar_usuarios(){
+            $data["usersList"] = $this->user->getAll();
+            $data["idUsuarioLogueado"] = $_SESSION["id"];
+            View::show("vista_adminCuentas", $data);
+        }
+        
+        public function eliminar_cuenta(){
+            if($this->security->get("tipo") == 0){
+                $data["usuario"]=$_REQUEST["usuario"];
+                $resultInsert = $this->user->delete($data);
+                if($resultInsert){
+                    $data["mensaje"] = "Usuario eliminado con exito";
+                }else {
+                    $data["mensaje"] = "No se pudo borrar al usuario";
+                }
+                View::redirect("mostrar_usuarios", $data);
+            }else{
+                $data["usuario"] = $this->security->get("nombre");
+                $resultInsert = $this->user->delete($data);
+                if($resultInsert){
+                    $data["mensaje"] = "Usuario eliminado con exito";
+                     View::redirect("mostrar_página", $data);
+                }else {
+                $data["mensaje"] = "Error al borrar";
+                View::redirect("mostrar_datos", $data);
+            }
+        }
+        }
+
+        
+        public function mostrar_usuario_modificar(){
+            $usurname = $_REQUEST["usuario"];
+            $data["datosUsuario"] = $this->user->getUsuarioAll($usurname);
+            $data["mensaje"] = (isset($_REQUEST["mensaje"]) ? $_REQUEST["mensaje"] : null);
+            View::show("vista_modificar_usuario", $data);
+        }
+
+        public function modificar_usuario(){
+            $data['usuario'] = $_REQUEST['usuario'];
+            $data['pasword'] = $_REQUEST['contraseña'];
+            $data['nombre'] = $_REQUEST['nombre'];
+            $data['apellidos'] = $_REQUEST['apellidos'];
+            $data['correo'] = $_REQUEST['correo'];
+            $data["tipo"] = $_REQUEST["tipo"];
+            $resultInsert = $this->user->updateAdmin($data);
+            $data = null;
+            if ($resultInsert == 1) {
+                $data["mensaje"] = "Usuario modificado con éxito";
+                View::redirect("mostrar_usuarios", $data);
+            } else {
+    
+                $data["mensaje"] = "Error, no se puedo modificar el usuario";
+                View::redirect("mostrar_usuarios", $data);
+            }
+        }
+
+        public function anadir_usuario(){
+            $data['usuario'] = $_REQUEST['usuario'];
+            $data['pasword'] = $_REQUEST['contraseña'];
+            $data["tipo"] = $_REQUEST["tipo"];
+            $data['nombre'] = $_REQUEST['nombre'];
+            $data['apellidos'] = $_REQUEST['apellidos'];
+            $data['correo'] = $_REQUEST['correo'];
+            $resultInsert = $this->user->insertAdmin($data);
+            $data = null;
+            if ($resultInsert == 1) {
+                $data["mensaje"] = "Usuario creado con éxito";
+                View::redirect("mostrar_usuarios", $data);
+            } else {
+    
+                $data["mensaje"] = "Error, no se puedo crear el usuario";
+                View::redirect("mostrar_usuarios", $data);
+            }
         }
 
     }

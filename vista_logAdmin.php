@@ -11,9 +11,10 @@
         <input type="text" name ="buscar" value="">
         <input type="submit" name="buscar" value="Buscar">
     </div>
-    <div id="botones">
-        <input type="submit" name="adnuistrar" value="Administrar cuentas"> &nbsp;&nbsp;&nbsp;&nbsp; <!--Falta poner la referencia-->
-        <input type="submit" name="cerrar" value="Cerrar sesión"> <!--Falta poner la referencia-->
+    <div id="botones_admin">
+        <input type="submit" name="adnuistrar" value="Administrar cuentas" onclick="window.location.href='index.php?do=mostrar_usuarios'"> <br/> <!--Falta poner la referencia-->
+        <br/><input type="submit" name="adnuistrar" value="Administrar peliculas" onclick="window.location.href='index.php?do=mostrar_admin_pelicula'"> &nbsp;&nbsp;&nbsp;&nbsp; <!--Falta poner la referencia-->
+        <input type="submit" name="cerrar" value="Cerrar sesión" onclick="window.location.href='index.php?do=Desconectar'"> 
     </div>
 </div>
 <div id="cuerpo">
@@ -22,7 +23,7 @@
     $c_peliculas = new ControladorPeliculas();
     $peliculas=$c_peliculas->mostrar_peliculas();
     foreach($peliculas as $pelis){
-        echo "<div id = 'pelis'> <img src='$pelis->cartel'> <span class='titulo'>$pelis->nombre</span> <br/><span>$pelis->anyo_presentacion</span> <br/> <a href='index.php?do=modificar_pelicula&id=" . $pelis->id . "'>Editar</a> </div>";
+        echo "<div id = 'pelis'> <img src='$pelis->cartel'> <span class='titulo'>$pelis->nombre</span> <br/><span>$pelis->anyo_presentacion</span> <br/> <a href='index.php?do=mostrar_pelicula_modificar&id=" . $pelis->id . "'>Editar</a> <a href='index.php?do=eliminar_pelicula&id=" . $pelis->id . "'>Eliminar</a> </div>";
     }
     ?>
 

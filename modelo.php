@@ -55,7 +55,7 @@ class Usuarios {
         $apellidos = $data["apellidos"];
         $correo = $data["correo"];
         $tipo = $data["tipo"];
-        $sql = ("INSERT INTO usuarios VALUES ('$username', '$pasword', '$tipo', '$nombre', '$apellidos', '$correo')");echo $sql;
+        $sql = ("INSERT INTO usuarios VALUES (NULL,'$username', '$nombre', '$apellidos', '$correo','$pasword', $tipo)");echo $sql;
         $result = $this->conexdb->sqlOther($sql);
         if ($result == 1) {
             return true;
@@ -72,7 +72,7 @@ class Usuarios {
         $apellidos = $data["apellidos"];
         $correo = $data["correo"];
         $tipo = $data["tipo"];
-        $sql = ("UPDATE usuarios SET pasword = '$pasword', tipo = '$tipo', nombre_real= '$nombre', apellidos = '$apellidos', correo = '$correo' WHERE nombre = '$username'");
+        $sql = ("UPDATE usuarios SET contraseña = '$pasword', tipo = '$tipo', nombre= '$nombre', apellidos = '$apellidos', correo = '$correo' WHERE usuario = '$username'");
         $result =$this->conexdb->sqlOther($sql);
         if ($result == 1) {
             return true;
@@ -98,8 +98,9 @@ class Usuarios {
     }
 
     public function delete($data){
-        $username = $data["usuario"];
-        $sql = ("DELETE FROM usuarios WHERE nombre = '$username'");
+        $id = $data["usuario"];
+        $sql = ("DELETE FROM usuarios WHERE usuario = '$id'");
+        echo $sql;
         $result=$this->conexdb->sqlOther($sql);
         if ($result == 1) {
             return true;

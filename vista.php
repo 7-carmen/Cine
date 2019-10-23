@@ -16,4 +16,15 @@
             $url = $url . "'</script>";
             echo $url;
         }
+
+        public static function redirectPeliculas($actionName, $data=null) {
+            $url = "<script>location.href='index.php?do=$actionName";
+            if ($data != null) {
+                foreach ($data as $clave=>$valor) {
+                    $url = $url . "&" . $clave . "=" . $valor;
+                }
+            }
+            $url = $url . "'</script>";
+            echo $url;
+        }
     }

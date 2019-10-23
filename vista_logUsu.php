@@ -12,8 +12,8 @@
         <input type="submit" name="buscar" value="Buscar">
     </div>
     <div id="botones">
-        <input type="submit" name="adnuistrar" value="Modificar mis datos"> &nbsp;&nbsp;&nbsp;&nbsp; <!--Falta poner la referencia-->
-        <input type="submit" name="cerrar" value="Cerrar sesión"> <!--Falta poner la referencia-->
+       <!-- <input type="submit" name="adnuistrar" value="Modificar mis datos" onclick="window.location.href='index.php?do=mostrar_usuario_modificar'"> &nbsp;&nbsp;&nbsp;&nbsp; Falta poner la referencia-->
+        <input type="submit" name="cerrar" value="Cerrar sesión" onclick="window.location.href='index.php?do=Desconectar'"> 
     </div>
 </div>
 <div id="cuerpo">
