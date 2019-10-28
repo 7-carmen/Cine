@@ -24,13 +24,14 @@
     }
     $listaPelis = $data["datosPelicula"];
     foreach ($listaPelis as $peli){
-        echo "<form action='index.php' method='get'>
+        echo "<form  enctype='multipart/form-data' action='index.php' method='post'>
             <br />Id: <br/> <input type='text' name='id' value='$peli->id'><br />
             <br /> Nombre<br /> <input type='text' name='nombre' value='$peli->nombre'><br />
             <br /> Año:<br /> <input type='text' name='anyo'  value='$peli->anyo_presentacion'><br />
             <br /> Duración: <br /> <input type='text' name='duracion'  value='$peli->duracion'><br />
             <br /> Genero:<br /> <input type='text' name='genero'  value='$peli->genero'><br />
-            <br /> Cartel: <br /> <input type='text' name='cartel'  value='$peli->cartel'><br />
+            <br /> Cartel: <br /> <input type='hidden' name='MAX_FILE_SIZE' value='30000000' />
+            <input id='fichero_usuario' name='fichero_usuario' type='file' value='$peli->cartel' /> <br />
             <br /> <input type='submit' value='Modificar pelicula'>
             <br /> <input type='hidden' name='do' value='modificar_pelicula'><br />
         </form>";

@@ -48,14 +48,24 @@ include("modelo_peliculas.php");
             $data['anyo'] = $_REQUEST['anyo'];
             $data["duracion"] = $_REQUEST["duracion"];
             $data['genero'] = $_REQUEST['genero'];
-            $data['cartel'] = $_REQUEST['cartel'];
-            $resultInsert = $this->peli->insertAdmin($data);
+            $target_dir = "IMG_PHP/";
+            $target_file = $target_dir . basename($_FILES["fichero_usuario"]["name"]);
+            $data['cartel'] = $target_file;
+
+            //var_dump($_FILES);
+
+            //Comprobamos que la imagen tenga un tamaño distinto de 0
+            $check = getimagesize($_FILES["fichero_usuario"]["tmp_name"]);
+            if($check !== false) {
+                move_uploaded_file($_FILES["fichero_usuario"]["tmp_name"], $target_file);
+                $resultInsert = $this->peli->insertAdmin($data);
+            }
+
             $data = null;
             if ($resultInsert == 1) {
                 $data["mensaje"] = "Pelicula añadida con éxito";
                 View::redirect("mostrar_admin_pelicula", $data);
             } else {
-    
                 $data["mensaje"] = "Error, no se puedo añadir la pelicula";
                 View::redirect("mostrar_admin_pelicula", $data);
             }
@@ -67,7 +77,20 @@ include("modelo_peliculas.php");
             $data['anyo'] = $_REQUEST['anyo'];
             $data["duracion"] = $_REQUEST["duracion"];
             $data['genero'] = $_REQUEST['genero'];
-            $data['cartel'] = $_REQUEST['cartel'];
+            $target_dir = "IMG_PHP/";
+            $target_file = $target_dir . basename($_FILES["fichero_usuario"]["name"]);
+
+            //var_dump($_FILES);
+
+            //Comprobamos que la imagen tenga un tamaño distinto de 0
+            $check = getimagesize($_FILES["fichero_usuario"]["tmp_name"]);
+            if($check !== false) {
+                move_uploaded_file($_FILES["fichero_usuario"]["tmp_name"], $target_file);
+                $data['cartel'] = $target_file;
+            }else{
+                $data['cartel'] = $this->peli->getCartel($data["id"]);//obtener ruta de base de datos;
+            }
+
             $resultInsert = $this->peli->updateAdmin($data);
             $data = null;
             if ($resultInsert == 1) {

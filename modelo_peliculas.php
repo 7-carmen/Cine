@@ -17,6 +17,11 @@ class Peliculas {
         return $result;
     }
 
+    public function getCartel($id){
+        $result = $this->conexdb->sqlSelect("SELECT cartel FROM peliculas WHERE id = '$id'");
+        return $result;
+    }
+
     public function delete($data){
         $id = $data["id"];
         $sql = ("DELETE FROM peliculas WHERE id = '$id'");
